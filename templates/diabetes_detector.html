@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% block content%}
+<h1>Diabetes Detector</h1>
+<div style="background-color: #f9f9f9; padding: 20px; margin-top: 20px; border-radius: 10px; border: 2px solid #ddd;">
+    <h3 style="color: #333; text-align: center;">📢 Important Instructions</h3>
+    <ul style="font-size: 18px; line-height: 1.6;">
+        <li>Please upload images taken in <strong>good lighting conditions</strong>.</li>
+        <li>Ensure <strong>no nail polish, artificial nails, or treatments</strong> are applied.</li>
+        <li>Make sure nails are <strong>clean and free from dirt</strong>.</li>
+        <li>Accurate results depend on clear and natural nail images.</li>
+    </ul>
+</div>
+<hr style="margin: 40px 0; border: 1px solid #ddd;">
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" class = btn name="file" required>
+    <button type="submit" class="btn">Predict</button>
+</form>
+
+{% if filename %}
+<div>
+    <h3>Result:</h3>
+    <img src="{{ url_for('display_image', filename=filename) }}" width="200">
+    <p><strong>Prediction:</strong> {{ label }}</p>
+    <p><strong>Confidence:</strong> {{ confidence }}%</p>
+</div>
+<hr style="margin: 40px 0; border: 1px solid #110f0f;">
+
+<div style="background-color: #fff3cd; padding: 20px; margin-top: 20px; border-radius: 10px; border: 2px solid #ffeeba;">
+    <h3 style="color: #856404; text-align: center;">⚠️ Disclaimer</h3>
+    <p style="font-size: 18px; line-height: 1.8; color: #856404;">
+        Please note that the results shown here are based on a pre-trained Artificial Intelligence (AI) model, which analyzes images to provide predictions with confidence scores.
+        However, the AI model <strong>may not always be 100% accurate</strong> and can make mistakes.
+    </p>
+    <p style="font-size: 18px; line-height: 1.8; color: #856404;">
+        We strongly recommend that you <strong>do not rely solely on these results</strong> for any medical decision. It is always better to confirm with certified medical tests like <strong>glucose tests, HbA1c tests, or professional diagnostics</strong> conducted by healthcare providers.
+    </p>
+</div>
+
+{% endif %}
+
+{% endblock %}
